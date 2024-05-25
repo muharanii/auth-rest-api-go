@@ -1,12 +1,16 @@
 package domain
 
-import "context"
+import (
+	"context"
+
+	"github.com/muharanii/auth-rest-api-go/dto"
+)
 
 type User struct{
 	ID int64 `db:"id"`
 	FullName string `db:"full_name"`
 	Phone string `db:"phone"`
-	Username string `db: `
+	Username string `db:"username`
 	Password string `db:"password"`
 }
 
@@ -16,5 +20,7 @@ type UserInterface interface {
 }
 
 type UserService interface{
-	Authenticatr()
+	Authenticate(ctx context.Context, req dto.AuthReq) (dto.AuthRes, error)
+	ValidateToken(ctx context.Context, token string ) (dto.UserData, error)
+
 }
